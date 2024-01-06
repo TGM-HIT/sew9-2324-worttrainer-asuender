@@ -25,11 +25,7 @@ public class WortEntry {
         if (url == null) throw new NullPointerException("Die URL darf kein Nullobjekt sein!");
 
         this.word = word;
-        if (checkURL(url.toString())) {
-            this.url = url;
-        }  else {
-            throw new IllegalArgumentException("Die URL ist ungültig!");
-        }
+        this.url = url;
     }
 
     /**
@@ -77,28 +73,7 @@ public class WortEntry {
     public void setUrl(URL url) {
         if (url == null) throw new NullPointerException("Die URL darf kein Nullobjekt sein!");
 
-        if (checkURL(url.toString())) {
-            this.url = url;
-        }  else {
-            throw new IllegalArgumentException("Die URL ist ungültig!");
-        }
-    }
-
-    /**
-     * Checks a provided URL against the following criteria:
-     *  - 'http://' or 'https://' appears at the beginning
-     *  - after the protocol, there should be at least 1 letter ...
-     *  - ... followed by a period ...
-     *  - ... and again at least one letter.
-     * This uses a custom regex pattern.
-     * Null objects are not accepted.
-     * @param url The URL to be checked
-     * @return true if the URL meets the above criteria, otherwise false
-     */
-    public static boolean checkURL(String url) {
-        if (url == null) throw new NullPointerException("Die URL darf kein Nullobjekt sein!");
-
-        return url.matches("^https?://[a-zA-Z]+\\.[a-zA-Z]+");
+        this.url = url;
     }
 
     /**
