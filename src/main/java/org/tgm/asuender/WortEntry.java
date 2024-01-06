@@ -34,7 +34,7 @@ public class WortEntry {
      * Returns the saved word.
      * @return the saved word
      */
-    public String getWort() {
+    public String getWord() {
         return word;
     }
 
