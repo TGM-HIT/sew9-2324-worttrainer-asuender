@@ -13,6 +13,8 @@ public class WortEntry {
     private String word;
     URL url;
 
+    public WortEntry() { }
+
     /**
      * Initializes an empty word entry.
      * @param word the word to be saved, must be at least 2 characters long
