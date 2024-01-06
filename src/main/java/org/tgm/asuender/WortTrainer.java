@@ -118,7 +118,7 @@ public class WortTrainer {
      * @param word the word to be checked, must not be null and must be at least 2 characters long.
      * @return true if the word is equal to the selected item, false otherwise
      */
-    public boolean check(String word) {
+    public boolean check(String word, boolean ignoreCase) {
         if (word == null) {
             throw new NullPointerException("Das Wort darf kein Nullobjekt sein!");
         }
@@ -127,27 +127,8 @@ public class WortTrainer {
             throw new IllegalArgumentException("Das Wort muss mind. 2 Buchstaben lang sein!");
         }
 
-        boolean equal = this.getSelectedItem().getWord().equals(word);
-        this.statistics.addAttempt(equal);
-
-        return equal;
-    }
-
-    /**
-     * Checks the given word against the selected item, ignoring case.
-     * @param word the word to be checked, must not be null and must be at least 2 characters long.
-     * @return true if the word is equal to the selected item, false otherwise
-     */
-    public boolean checkIgnoreCase(String word) {
-        if (word == null) {
-            throw new NullPointerException("Das Wort darf kein Nullobjekt sein!");
-        }
-
-        if (word.trim().length() < 2) {
-            throw new IllegalArgumentException("Das Wort muss mind. 2 Buchstaben lang sein!");
-        }
-
-        boolean equal = this.getSelectedItem().getWord().equalsIgnoreCase(word);
+        String correctWord = this.getSelectedItem().getWord();
+        boolean equal = ignoreCase ? correctWord.equalsIgnoreCase(word) : correctWord.equals(word);
         this.statistics.addAttempt(equal);
 
         return equal;
