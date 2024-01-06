@@ -41,7 +41,7 @@ public class XMLStorage implements GenericStorage {
     @Override
     public boolean saveData(WortTrainer trainer) {
         try {
-            mapper.writeValue(new File(path), trainer);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(path), trainer);
         } catch(IOException ioe) {
             return false;
         }
