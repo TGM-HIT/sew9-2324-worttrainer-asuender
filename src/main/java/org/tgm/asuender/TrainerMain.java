@@ -11,6 +11,12 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class is used to show how {@link WortTrainer} and {@link WortEntry} can be sued
+ * with a simple GUI to show the user a random image and ask for the corresponding word.
+ * @author Andreas Sünder
+ * @version 01-07-2024
+ */
 public class TrainerMain {
     public static void main(String[] args) throws MalformedURLException {
         XMLStorage storage = new XMLStorage();
