@@ -79,6 +79,17 @@ public class WortEntry {
     }
 
     /**
+     * Checks if the given object is equal to the current object by checking if the word and the URL are equal.
+     * @param obj the object to be checked
+     * @return true if the given object is equal to the current object, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof WortEntry other)) return false;
+        return this.word.equals(other.word) && this.url.toString().equals(other.url.toString());
+    }
+
+    /**
      * Returns the String representation of the current object in the format
      * "[word];[url]".
      * @return String representation
