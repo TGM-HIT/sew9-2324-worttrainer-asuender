@@ -35,7 +35,7 @@ public class TrainerMain {
         Image image;
         int numTries = 0;
         do {
-            WortEntry entry = trainer.getRandomItem();
+            WortEntry entry = trainer.getRandomEntry();
 
             try {
                 image = ImageIO.read(entry.getUrl());

@@ -28,11 +28,13 @@ public class WortTrainer {
 
     /**
      * Initializes a word trainer with the given list of word entries.
-     * @param items the list of word entries to be saved, must not be null or empty
+     * @param entries the list of word entries to be saved, must not be null or empty
      */
-    public WortTrainer(List<WortEntry> items) {
-        if (items.isEmpty()) throw new IllegalArgumentException("Die Liste ist leer!");
-        this.entries = items;
+    public WortTrainer(List<WortEntry> entries) {
+        if (entries == null) throw new NullPointerException("Die Liste darf kein Nullobjekt sein!");
+        if (entries.isEmpty()) throw new IllegalArgumentException("Die Liste ist leer!");
+
+        this.entries = entries;
     }
 
     /**
@@ -45,24 +47,23 @@ public class WortTrainer {
 
     /**
      * Sets a new list of word entries. The other attributes are reset.
-     * @param items the new list of word entries, must not be null
+     * @param entries the new list of word entries, must not be null
      */
-    public void getEntries(List<WortEntry> items) {
-        if (items == null) {
-            throw new NullPointerException("Die Liste darf kein Nullobjekt sein!");
-        }
+    public void setEntries(List<WortEntry> entries) {
+        if (entries == null) throw new NullPointerException("Die Liste darf kein Nullobjekt sein!");
+        if (entries.isEmpty()) throw new IllegalArgumentException("Die Liste ist leer!");
 
-        this.entries = items;
+        this.entries = entries;
         this.selected = -1;
         this.statistics = new WortStatistics();
     }
 
     /**
-     * Returns a random item.
-     * @return a random item.
+     * Returns a random entry.
+     * @return a random entry.
      */
     @JsonIgnore
-    public WortEntry getRandomItem() {
+    public WortEntry getRandomEntry() {
         if (this.entries.isEmpty()) throw new IllegalArgumentException("Die Liste ist leer!");
 
         this.selected = new Random().nextInt(this.entries.size());
@@ -70,26 +71,30 @@ public class WortTrainer {
     }
 
     /**
-     * Returns the index of the selected item.
-     * @return the index of the selected item
+     * Returns the index of the selected entry.
+     * @return the index of the selected entry
      */
     public int getSelected() {
         return selected;
     }
 
     /**
-     * Returns the selected item.
-     * @return the selected item
+     * Returns the selected entry.
+     * @return the selected entry
      */
-    private WortEntry getSelectedItem() {
+    private WortEntry getSelectedEntry() {
         return this.entries.get(this.selected);
     }
 
     /**
-     * Sets the index of the selected item. Shall only be used for deserialization.
-     * @param selected the index of the selected item
+     * Sets the index of the selected entry. Shall only be used for deserialization.
+     * @param selected the index of the selected entry
      */
     public void setSelected(int selected) {
+        if (selected >= this.entries.size()) {
+            throw new IllegalArgumentException("Der Index ist zu groß!");
+        }
+
         this.selected = selected;
     }
 
@@ -114,9 +119,9 @@ public class WortTrainer {
 
 
     /**
-     * Checks the given word against the selected item.
+     * Checks the given word against the selected entry.
      * @param word the word to be checked, must not be null and must be at least 2 characters long.
-     * @return true if the word is equal to the selected item, false otherwise
+     * @return true if the word is equal to the selected entry, false otherwise
      */
     public boolean check(String word, boolean ignoreCase) {
         if (word == null) {
@@ -127,7 +132,7 @@ public class WortTrainer {
             throw new IllegalArgumentException("Das Wort muss mind. 2 Buchstaben lang sein!");
         }
 
-        String correctWord = this.getSelectedItem().getWord();
+        String correctWord = this.getSelectedEntry().getWord();
         boolean equal = ignoreCase ? correctWord.equalsIgnoreCase(word) : correctWord.equals(word);
         this.statistics.addAttempt(equal);
 
