@@ -58,7 +58,6 @@ public class XMLStorage implements GenericStorage {
         try {
             return mapper.readValue(new File(path), WortTrainer.class);
         } catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
             return null;
         }
     }
