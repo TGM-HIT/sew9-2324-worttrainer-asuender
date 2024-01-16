@@ -1,2 +1,2 @@
-rootProject.name = "SEW9-Worttrainer"
+rootProject.name = "sew9-worttrainer-asuender"
 
