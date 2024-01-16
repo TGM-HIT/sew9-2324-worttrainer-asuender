@@ -36,6 +36,10 @@ publishing {
     publications {
         publications {
             register<MavenPublication>("gpr") {
+                groupId = "org.tgm.asuender"
+                artifactId =  "worttrainer-asuender"
+                version = "1.0"
+
                 from(components["java"])
             }
         }
